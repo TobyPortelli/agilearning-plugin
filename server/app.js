@@ -1,7 +1,13 @@
 import express from "express";
-const app = express();
+import path from 'path';
+import { fileURLToPath } from "url";
 
-const PORT = process.env.PORT || 8080;
+const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const port = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("/*", (req, res) => {
     res.sendFile(
@@ -14,6 +20,6 @@ app.get("/*", (req, res) => {
     );
 });
 
-app.listen(PORT, () => {
+app.listen(port, () => {
     console.log(`App is running on ${port}`);
 })

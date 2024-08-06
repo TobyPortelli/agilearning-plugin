@@ -9,6 +9,7 @@
     "body-parser": "^1.20.2",
     "bytes": "^3.1.2",
     "call-bind": "^1.0.7",
+    "concurrently": "^8.2.2",
     "content-disposition": "^0.5.4",
     "content-type": "^1.0.5",
     "cookie": "^0.6.0",
@@ -68,10 +69,12 @@
     "utils-merge": "^1.0.1",
     "vary": "^1.1.2"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd server && node app.js"
+    "client": "cd client && npm start",
+    "server": "cd server && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm install --prefix server && npm run build --prefix client"
+
   },
   "keywords": [],
   "author": "",
